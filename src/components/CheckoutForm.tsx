@@ -1,3 +1,4 @@
+import CardBrands from '@components/CardBrands';
 import { LoadingButton } from '@mui/lab';
 import {
     Box,
@@ -32,6 +33,10 @@ const CheckoutForm = (props: Props): JSX.Element => {
                                     <Box marginBottom={4} color="text.primary">
                                         <Typography component="h1" fontSize="1.25rem" marginBottom={2}>Estamos quase lá!</Typography>
                                         <Typography component="h2">Insira seus dados de pagamento abaixo:</Typography>
+                                    </Box>
+
+                                    <Box marginBottom={4}>
+                                        <CardBrands />
                                     </Box>
 
                                     <Grid container spacing={4} marginBottom={4}>
