@@ -1,4 +1,5 @@
 import CardBrands from '@components/CardBrands';
+import PlanList from '@components/PlanList';
 import { LoadingButton } from '@mui/lab';
 import {
     Box,
@@ -29,7 +30,7 @@ const CheckoutForm = (props: Props): JSX.Element => {
                     <Form>
                         <Grid container justifyContent="space-between">
                             <Grid item xs="auto">
-                                <Box maxWidth="330px">
+                                <Box width="330px">
                                     <Box marginBottom={4} color="text.primary">
                                         <Typography component="h1" fontSize="1.25rem" marginBottom={2}>Estamos quase lá!</Typography>
                                         <Typography component="h2">Insira seus dados de pagamento abaixo:</Typography>
@@ -112,12 +113,20 @@ const CheckoutForm = (props: Props): JSX.Element => {
                             </Grid>
 
                             <Grid item xs="auto">
-                                <Box maxWidth="330px">
+                                <Box width="330px">
                                     <Typography component="h1" color="text.primary" fontSize="1.25rem" marginBottom={1}>Confira o seu plano:</Typography>
 
-                                    <Chip label="lorem@ipsum.com.br" variant="outlined" />
+                                    <Box marginBottom={2}>
+                                        <Chip label="lorem@ipsum.com.br" variant="outlined" />
+                                    </Box>
 
-                                    <Button variant="text" size="small" sx={{ color: 'text.primary' }}>Sobre a cobrança</Button>
+                                    <Box marginBottom={4}>
+                                        <PlanList items={[]} />
+                                    </Box>
+
+                                    <Box display="flex" justifyContent="center">
+                                        <Button variant="text" size="small" sx={{ color: 'text.primary' }}>Sobre a cobrança</Button>
+                                    </Box>
                                 </Box>
                             </Grid>
                         </Grid>
