@@ -1,6 +1,15 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
+  redirects: async () => {
+    return [
+      {
+        source: '/',
+        destination: '/checkout',
+        permanent: true
+      }
+    ];
+  },
   experimental: {
     images: {
       layoutRaw: true
@@ -8,4 +17,4 @@ const nextConfig = {
   }
 }
 
-module.exports = nextConfig
+module.exports = nextConfig;
