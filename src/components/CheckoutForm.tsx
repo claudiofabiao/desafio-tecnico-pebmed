@@ -52,9 +52,9 @@ const CheckoutForm = (props: Props): JSX.Element => {
 
                     return (
                         <Form>
-                            <Grid container justifyContent="space-between">
-                                <Grid item xs="auto">
-                                    <Box width="330px">
+                            <Grid container justifyContent="space-between" flexDirection={{ xs: 'column', md: 'row' }} alignItems={{ xs: 'center', md: 'flex-start' }}>
+                                <Grid item xs="auto" order={{ xs: 1, md: 0 }}>
+                                    <Box maxWidth="346px" padding={2}>
                                         <Box marginBottom={4} color="text.primary">
                                             <Typography component="h1" fontSize="1.25rem" marginBottom={2}>Estamos quase lá!</Typography>
                                             <Typography component="h2">Insira seus dados de pagamento abaixo:</Typography>
@@ -142,8 +142,8 @@ const CheckoutForm = (props: Props): JSX.Element => {
                                     </Box>
                                 </Grid>
 
-                                <Grid item xs="auto">
-                                    <Box width="330px">
+                                <Grid item xs="auto" order={{ xs: 0, md: 1 }}>
+                                    <Box maxWidth="346px" padding={2}>
                                         <Typography component="h1" color="text.primary" fontSize="1.25rem" marginBottom={1}>Confira o seu plano:</Typography>
 
                                         <Box marginBottom={2}>

@@ -14,10 +14,10 @@ const Success: NextPage = () => {
                 <title>Sucesso - Whitebook</title>
             </Head>
 
-            <Box p={4}>
+            <Box>
                 <Header />
 
-                <Box width="340px" marginX="auto">
+                <Box maxWidth="340px" padding={2} marginX="auto">
                     <Box marginBottom={9} textAlign="center">
                         <Box marginBottom={2.5}>
                             <Image alt="Ícone" src={successIcon} layout="raw" />

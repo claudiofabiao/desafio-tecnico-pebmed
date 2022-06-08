@@ -28,7 +28,7 @@ const Checkout: NextPage<Props> = (props) => {
                 <title>Checkout - Whitebook</title>
             </Head>
 
-            <Box p={4}>
+            <Box>
                 <Header />
                 <CheckoutForm offers={offers} onSubmit={onSubmit} />
             </Box>
