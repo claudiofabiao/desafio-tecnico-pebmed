@@ -1,14 +1,13 @@
 import PlanListItem from '@components/PlanListItem';
 import { Stack } from '@mui/material';
 
-type Props = {
-    items: any[];
-};
+const PlanList = (props: any): JSX.Element => {
+    const { field, ...rest } = props;
 
-const PlanList = ({ items }: Props): JSX.Element => {
     return (
         <Stack spacing={1.5}>
             <PlanListItem
+                field={field}
                 id={1}
                 title="Anual"
                 description="À Vista"
@@ -18,12 +17,13 @@ const PlanList = ({ items }: Props): JSX.Element => {
             />
 
             <PlanListItem
-                id={1}
+                field={field}
+                id={2}
                 title="Anual"
                 description="Parcelado"
                 price={600}
                 discount={60}
-                order={1}
+                order={2}
             />
         </Stack>
     );

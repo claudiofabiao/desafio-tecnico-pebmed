@@ -1,31 +1,47 @@
 import CardBrands from '@components/CardBrands';
+import NumberField from '@components/NumberField';
 import PlanList from '@components/PlanList';
+import Select from '@components/Select';
+import TextField from '@components/TextField';
 import { LoadingButton } from '@mui/lab';
-import {
-    Box,
-    Button,
-    Chip,
-    FormControl,
-    Grid,
-    InputLabel,
-    MenuItem,
-    Select,
-    TextField,
-    Typography
-} from '@mui/material';
-import { Form, Formik } from 'formik';
-import NumberFormat from 'react-number-format';
+import { Box, Button, Chip, Grid, Typography, MenuItem } from '@mui/material';
+import { Field, Form, Formik } from 'formik';
+import * as Yup from 'yup';
 
 type Props = {
     onSubmit: (values: any) => void;
 };
 
+const errorMessages = {
+    required: 'Este campo é obrigatório.'
+};
+
+const Schema = Yup.object().shape({
+    creditCardNumber: Yup.string().required(errorMessages.required),
+    cardExpirationDate: Yup.string().required(errorMessages.required),
+    creditCardCVV: Yup.string().required(errorMessages.required),
+    creditCardHolder: Yup.string().required(errorMessages.required),
+    creditCardCPF: Yup.string().required(errorMessages.required),
+    couponCode: Yup.string(),
+    offerId: Yup.string().required(errorMessages.required)
+});
+
 const CheckoutForm = (props: Props): JSX.Element => {
     const { onSubmit } = props;
+    const initialValues = {
+        creditCardNumber: '',
+        cardExpirationDate: '',
+        creditCardCVV: '',
+        creditCardHolder: '',
+        creditCardCPF: '',
+        couponCode: '',
+        installments: 1,
+        offerId: 1
+    };
 
     return (
         <Box maxWidth="870px" marginX="auto">
-            <Formik initialValues={{}} onSubmit={onSubmit}>
+            <Formik initialValues={initialValues} validationSchema={Schema} onSubmit={onSubmit}>
                 {(formik) => (
                     <Form>
                         <Grid container justifyContent="space-between">
@@ -42,73 +58,73 @@ const CheckoutForm = (props: Props): JSX.Element => {
 
                                     <Grid container spacing={4} marginBottom={4}>
                                         <Grid item xs={12}>
-                                            <NumberFormat
-                                                format="#### #### #### ####"
-                                                mask="_"
+                                            <Field
+                                                name="creditCardNumber"
+                                                component={NumberField}
                                                 label="Número do cartão"
                                                 placeholder="0000 0000 0000 0000"
-                                                customInput={TextField}
+                                                format="#### #### #### ####"
                                             />
                                         </Grid>
 
                                         <Grid item xs={6}>
-                                            <NumberFormat
-                                                format="##/##"
-                                                mask="_"
+                                            <Field
+                                                name="cardExpirationDate"
+                                                component={NumberField}
                                                 label="Validade"
                                                 placeholder="MM/AA"
-                                                customInput={TextField}
+                                                format="##/##"
                                             />
                                         </Grid>
 
                                         <Grid item xs={6}>
-                                            <NumberFormat
-                                                format="###"
+                                            <Field
+                                                name="creditCardCVV"
+                                                component={NumberField}
                                                 label="CVV"
                                                 placeholder="000"
-                                                customInput={TextField}
+                                                format="###"
                                             />
                                         </Grid>
 
                                         <Grid item xs={12}>
-                                            <TextField
+                                            <Field
+                                                name="creditCardHolder"
+                                                component={TextField}
                                                 label="Nome impresso no cartão"
                                                 placeholder="Seu nome"
                                             />
                                         </Grid>
 
                                         <Grid item xs={12}>
-                                            <NumberFormat
+                                            <Field
+                                                name="creditCardCPF"
+                                                component={NumberField}
                                                 label="CPF"
                                                 placeholder="000.000.000-00"
                                                 format="###.###.###-##"
-                                                customInput={TextField}
                                             />
                                         </Grid>
 
                                         <Grid item xs={12}>
-                                            <TextField
+                                            <Field
+                                                name="couponCode"
+                                                component={TextField}
                                                 label="Cupom"
                                                 placeholder="Insira aqui"
                                             />
                                         </Grid>
 
                                         <Grid item xs={12}>
-                                            <FormControl sx={{ minWidth: 80 }}>
-                                                <InputLabel id="numero-parcelas">Número de parcelas</InputLabel>
-                                                <Select
-                                                    labelId="numero-parcelas"
-                                                    displayEmpty
-                                                    value={1}
-                                                    label="Número de parcelas"
-                                                >
-                                                    <MenuItem value={1}>1x</MenuItem>
-                                                </Select>
-                                            </FormControl>
+                                            <Field name="installments" component={Select} label="Número de parcelas">
+                                                <MenuItem value={1}>1x</MenuItem>
+                                                <MenuItem value={2}>2x</MenuItem>
+                                                <MenuItem value={3}>3x</MenuItem>
+                                            </Field>
                                         </Grid>
                                     </Grid>
 
-                                    <LoadingButton loading={formik.isSubmitting} type="submit" fullWidth sx={{ paddingY: '18px', borderRadius: 10 }}>Finalizar pagamento</LoadingButton>
+                                    <LoadingButton loading={formik.isSubmitting} disabled={!formik.dirty || !formik.isValid} type="submit" fullWidth sx={{ paddingY: '18px', borderRadius: 10 }}>Finalizar pagamento</LoadingButton>
                                 </Box>
                             </Grid>
 
@@ -121,7 +137,11 @@ const CheckoutForm = (props: Props): JSX.Element => {
                                     </Box>
 
                                     <Box marginBottom={4}>
-                                        <PlanList items={[]} />
+                                        <Field
+                                            name="offerId"
+                                            component={PlanList}
+                                            items={[]}
+                                        />
                                     </Box>
 
                                     <Box display="flex" justifyContent="center">

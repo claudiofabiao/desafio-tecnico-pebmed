@@ -9,7 +9,9 @@ type Props = {
     order: number;
 };
 
-const PlanListItem = ({ id, title, description, price, discount, order }: Props): JSX.Element => {
+const PlanListItem = (props: any): JSX.Element => {
+    const { id, title, description, price, discount, order, field } = props;
+
     return (
         <Box border={1} borderColor="primary.main" borderRadius={3} p={2.5} display="flex" alignItems="center" justifyContent="space-between">
             <Box display="flex" alignItems="center">
@@ -22,7 +24,7 @@ const PlanListItem = ({ id, title, description, price, discount, order }: Props)
                     <Chip color="secondary" label="15%" sx={{ fontSize: '0.625rem', color: 'white', height: '16px' }} />
                 </Box>
             </Box>
-            <Radio value={1} checked={true} />
+            <Radio name={field.name} value={id} checked={id == field.value} onChange={field.onChange} />
         </Box>
     );
 };
