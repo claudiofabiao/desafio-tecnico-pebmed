@@ -1,3 +1,4 @@
+import AboutBilling from '@components/AboutBilling';
 import CardBrands from '@components/CardBrands';
 import CurrencyFormat from '@components/CurrencyFormat';
 import HelpIcon from '@components/HelpIcon';
@@ -158,7 +159,7 @@ const CheckoutForm = (props: Props): JSX.Element => {
                                         </Box>
 
                                         <Box display="flex" justifyContent="center">
-                                            <Button variant="text" size="small" sx={{ color: 'text.primary' }} endIcon={<HelpIcon />}>Sobre a cobrança</Button>
+                                            <AboutBilling />
                                         </Box>
                                     </Box>
                                 </Grid>
