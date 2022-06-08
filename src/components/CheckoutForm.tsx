@@ -1,14 +1,13 @@
 import AboutBilling from '@components/AboutBilling';
 import CardBrands from '@components/CardBrands';
 import CurrencyFormat from '@components/CurrencyFormat';
-import HelpIcon from '@components/HelpIcon';
 import NumberField from '@components/NumberField';
 import OfferList from '@components/OfferList';
 import Select from '@components/Select';
 import TextField from '@components/TextField';
 import Offer from '@interfaces/Offer';
 import { LoadingButton } from '@mui/lab';
-import { Box, Button, Chip, Grid, MenuItem, Typography } from '@mui/material';
+import { Box, Chip, Grid, MenuItem, Typography } from '@mui/material';
 import { Field, Form, Formik } from 'formik';
 import * as Yup from 'yup';
 
@@ -23,7 +22,7 @@ const errorMessages = {
 
 const Schema = Yup.object().shape({
     creditCardNumber: Yup.string().required(errorMessages.required),
-    cardExpirationDate: Yup.string().required(errorMessages.required),
+    creditCardExpirationDate: Yup.string().required(errorMessages.required),
     creditCardCVV: Yup.string().required(errorMessages.required),
     creditCardHolder: Yup.string().required(errorMessages.required),
     creditCardCPF: Yup.string().required(errorMessages.required),
@@ -35,7 +34,7 @@ const CheckoutForm = (props: Props): JSX.Element => {
     const { offers, onSubmit } = props;
     const initialValues = {
         creditCardNumber: '',
-        cardExpirationDate: '',
+        creditCardExpirationDate: '',
         creditCardCVV: '',
         creditCardHolder: '',
         creditCardCPF: '',
@@ -77,7 +76,7 @@ const CheckoutForm = (props: Props): JSX.Element => {
 
                                             <Grid item xs={6}>
                                                 <Field
-                                                    name="cardExpirationDate"
+                                                    name="creditCardExpirationDate"
                                                     component={NumberField}
                                                     label="Validade"
                                                     placeholder="MM/AA"
@@ -129,7 +128,7 @@ const CheckoutForm = (props: Props): JSX.Element => {
                                                         {(() => {
                                                             const items = [];
                                                             for (let i = 1; i <= selectedOffer.installments; i++) {
-                                                                items.push(<MenuItem value={i}>{i}x (<CurrencyFormat value={selectedOffer.discountedTotal / i} />/mês)</MenuItem>);
+                                                                items.push(<MenuItem key={i} value={i}>{i}x (<CurrencyFormat value={selectedOffer.discountedTotal / i} />/mês)</MenuItem>);
                                                             }
                                                             return items;
                                                         })()}
